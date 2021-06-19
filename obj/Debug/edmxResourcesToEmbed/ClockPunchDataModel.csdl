@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClockPunchModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Projects" Relationship="ClockPunchModel.FK_Projects_Client" FromRole="Client" ToRole="Project" />
+  </EntityType>
+  <EntityContainer Name="ClockPunchEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Projects" EntityType="ClockPunchModel.Project" />
+    <AssociationSet Name="FK_Projects_Client" Association="ClockPunchModel.FK_Projects_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <EntitySet Name="Employees" EntityType="ClockPunchModel.Employee" />
+    <EntitySet Name="TimeLogs" EntityType="ClockPunchModel.TimeLog" />
+    <AssociationSet Name="FK_TimeLogs_Employees" Association="ClockPunchModel.FK_TimeLogs_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="TimeLog" EntitySet="TimeLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeLogs_Projects" Association="ClockPunchModel.FK_TimeLogs_Projects">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="TimeLog" EntitySet="TimeLogs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="ClockPunchModel.FK_Projects_Client" FromRole="Project" ToRole="Client" />
+    <NavigationProperty Name="TimeLogs" Relationship="ClockPunchModel.FK_TimeLogs_Projects" FromRole="Project" ToRole="TimeLog" />
+  </EntityType>
+  <Association Name="FK_Projects_Client">
+    <End Type="ClockPunchModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="ClockPunchModel.Project" Role="Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TimeLogs" Relationship="ClockPunchModel.FK_TimeLogs_Employees" FromRole="Employee" ToRole="TimeLog" />
+  </EntityType>
+  <EntityType Name="TimeLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Hours" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="ClockPunchModel.FK_TimeLogs_Employees" FromRole="TimeLog" ToRole="Employee" />
+    <NavigationProperty Name="Project" Relationship="ClockPunchModel.FK_TimeLogs_Projects" FromRole="TimeLog" ToRole="Project" />
+  </EntityType>
+  <Association Name="FK_TimeLogs_Employees">
+    <End Type="ClockPunchModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="ClockPunchModel.TimeLog" Role="TimeLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeLog">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeLogs_Projects">
+    <End Type="ClockPunchModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="ClockPunchModel.TimeLog" Role="TimeLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeLog">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

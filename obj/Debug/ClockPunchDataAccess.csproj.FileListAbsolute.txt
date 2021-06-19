@@ -1,0 +1,12 @@
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\ClockPunchDataAccess.dll.config
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\ClockPunchDataAccess.dll
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\ClockPunchDataAccess.pdb
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\EntityFramework.dll
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\EntityFramework.xml
+D:\Source Repo\Projects\ClockPunchDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Source Repo\Projects\ClockPunchDataAccess\obj\Debug\ClockPunchDataAccess.csproj.CoreCompileInputs.cache
+D:\Source Repo\Projects\ClockPunchDataAccess\obj\Debug\ClockPunchDataAccess.csproj.CopyComplete
+D:\Source Repo\Projects\ClockPunchDataAccess\obj\Debug\ClockPunchDataAccess.dll
+D:\Source Repo\Projects\ClockPunchDataAccess\obj\Debug\ClockPunchDataAccess.pdb
+D:\Source Repo\Projects\ClockPunchDataAccess\obj\Debug\ClockPunchDataAccess.csprojAssemblyReference.cache
